@@ -1,11 +1,9 @@
 package com.khermstad.famfoto.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,5 +22,13 @@ public class Family {
 
     @Column(name = "updatedDate")
     ZonedDateTime updatedDate;
+
+    @OneToMany
+    @JoinColumn(name = "person_id")
+    List<Person> members;
+
+    @OneToMany
+    @JoinColumn(name = "animal_id")
+    List<Animal> pets;
 
 }

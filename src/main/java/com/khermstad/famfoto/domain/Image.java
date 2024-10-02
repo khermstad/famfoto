@@ -3,6 +3,7 @@ package com.khermstad.famfoto.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -24,10 +25,10 @@ public class Image {
     @Column(name = "fileLocation")
     String fileLocation;
 
-    @JoinTable
+    @OneToMany
     List<Comment> comments;
 
-    @JoinTable
+    @OneToMany
     List<Tag> tags;
 
 }

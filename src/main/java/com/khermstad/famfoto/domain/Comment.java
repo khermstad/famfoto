@@ -1,11 +1,12 @@
 package com.khermstad.famfoto.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+@Entity
+@Table(name = "comment")
 public class Comment {
 
     @Id
@@ -17,4 +18,11 @@ public class Comment {
 
     @Column(name = "updatedDate")
     ZonedDateTime updatedDate;
+
+    @Column(name = "text")
+    String text;
+
+    @OneToOne
+    @JoinColumn(name = "creator_id", referencedColumnName = "id")
+    User creator;
 }
