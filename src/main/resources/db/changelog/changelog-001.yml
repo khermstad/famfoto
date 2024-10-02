@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-family-table
+      author: kris
+      changes:
+        - createTable:
+            tableName: family
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
