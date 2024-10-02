@@ -3,13 +3,13 @@ package com.khermstad.famfoto.domain;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "comment")
-public class Comment {
-
+@Table(name = "media")
+public class Media {
     @Id
     @Column(name = "id")
     UUID id = UUID.randomUUID();
@@ -20,16 +20,14 @@ public class Comment {
     @Column(name = "updatedDate")
     ZonedDateTime updatedDate;
 
-    @Column(name = "text")
-    String text;
+    @Column(name = "fileLocation")
+    String fileLocation;
 
-    @OneToOne
-    @JoinColumn(name = "creator_id", referencedColumnName = "id")
-    User creator;
+    @OneToMany(mappedBy = "media")
+    List<Comment> comments;
 
-    @ManyToOne
-    @JoinColumn(name = "media_id", referencedColumnName = "id")
-    Media media;
+    @OneToMany(mappedBy = "media")
+    List<Tag> tags;
 
     public UUID getId() {
         return id;
@@ -55,36 +53,36 @@ public class Comment {
         this.updatedDate = updatedDate;
     }
 
-    public String getText() {
-        return text;
+    public String getFileLocation() {
+        return fileLocation;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setFileLocation(String fileLocation) {
+        this.fileLocation = fileLocation;
     }
 
-    public User getCreator() {
-        return creator;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
-    public Media getMedia() {
-        return media;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setMedia(Media media) {
-        this.media = media;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id);
+        Media media = (Media) o;
+        return Objects.equals(id, media.id);
     }
 
     @Override
