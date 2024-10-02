@@ -29,6 +29,6 @@ public class Family {
 
     @OneToMany
     @JoinColumn(name = "animal_id")
-    List<Animal> pets;
+    List<Pet> pets;
 
 }
