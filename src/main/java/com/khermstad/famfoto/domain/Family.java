@@ -25,11 +25,11 @@ public class Family {
     ZonedDateTime updatedDate;
 
     @OneToMany
-    @JoinColumn(name = "person_id")
+    @JoinTable
     List<Person> members;
 
     @OneToMany
-    @JoinColumn(name = "animal_id")
+    @JoinTable
     List<Pet> pets;
 
     public UUID getId() {
